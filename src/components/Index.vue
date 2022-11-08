@@ -38,14 +38,14 @@
         <div>班際跳繩比賽</div>
         <div>2022/11/11</div>
       </div>
-      <div class="w-10/12 mt-12">
+      <div class="w-10/12 mt-8">
         <div class="flex justify-center items-center bg-[#CEC3B2] h-96">
           <div class="flex justify-center items-center w-12 h-12 p-12 rounded-full bg-[#A89B85]">
             <div class="triangle-right ml-2">
             </div>
           </div>
         </div>
-        <div class="flex flex-row items-center justify-center text-3xl font-bold tracking-wider mt-8 space-x-6 pl-4">
+        <div class="flex flex-row items-center justify-center text-3xl font-bold tracking-wider mt-4 space-x-6 pl-4">
           <form class="flex items-center p-4">
             <input @change="Video" type="file" class="block w-full
                   file:mr-4 file:py-2 file:px-4
@@ -54,8 +54,10 @@
                   file:text-lg file:font-semibold
                   file:text-center file:tracking-wide
                 " />
-            <button @click="uploadVideo()"
+            <button v-if="already" @click="uploadVideo()"
               class="w-40 bg-[#82D354] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">送出</button>
+              <button v-else 
+              class=" bg-[#cee0c3a3] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">尚未查詢</button>
           </form>
         </div>
       </div>
@@ -73,6 +75,7 @@ export default {
       school: '尚未查詢',
       grade: '尚未查詢',
       video: new FormData(),
+      already: false
     }
   },
   methods: {
@@ -93,6 +96,7 @@ export default {
               this.id = data[0].id
               this.school = data[0].school
               this.grade = data[0].grade
+              this.already = true
             }
             else {
               this.id = '查無此人'
@@ -103,9 +107,10 @@ export default {
     },
     Video(e) {
       this.video.append('file', e.target.files[0])
+      console.log(this.video)
     },
     uploadVideo() {
-      fetch(dataURL + '/uploadVideo', {
+      fetch(dataURL + '/uploadVideo/'+ this.id, {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token"),
