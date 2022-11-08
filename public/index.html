@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>跳繩比賽</title>
+    <style>
+        .triangle-right {
+            width: 0;
+            height: 0;
+            border-top: 25px solid transparent;
+            border-left: 50px solid #CEC3B2;
+            border-bottom: 25px solid transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-[#F4EEE1]">
+    <nav class="bg-[#CEC3B2] text-[#F4EEE1] h-16 border-[#A89B85] border-b-8 flex justify-end items-center pr-12 text-bold text-2xl tracking-wide">
+        <div class="flex items-center h-full">
+            <button>Logout</button>
+            <button class="bg-[#F4EEE1] p-2 w-8 h-8 flex justify-center items-center ml-4">
+                <span class="material-symbols-outlined text-[#A89B85]">
+                  menu
+                </span>
+            </button>
+        </div>
+    </nav>
+    <div class="flex  text-[#A89B85] pt-16">
+        <div class="w-full flex flex-col pl-32">
+            <div class="flex flex-row items-center text-4xl font-bold tracking-wider">
+                <div class="mr-4 mb-4">
+                    <span class="material-symbols-outlined text-bold text-8xl">
+                      account_circle
+                    </span>
+                </div>
+                <div class="">Welcome, XXX !</div>
+            </div>
+            <div class="flex flex-row space-x-4 text-2xl font-bold tracking-wider">
+                <input class="bg-[#CEC3B2] text-center p-2 flex items-center outline-none">
+                <button class="border-[#A89B85] border-4 text-center p-2">Enter</button>
+            </div>
+            <div class="flex flex-col  text-4xl font-bold tracking-wider mt-24 space-y-6 pl-4">
+                <div class="h-24">Race XXXX</div>
+                <div>
+                    <div>班際喵跳繩初賽</div>
+                    <div>喵喵國小</div>
+                    <div>2022/10/15</div>
+                </div>
+            </div>
+        </div>
+        <div class="w-full flex flex-col">
+            <div class="w-10/12 mt-16">
+                <div class="flex justify-center items-center bg-[#CEC3B2] h-96">
+                    <div class="flex justify-center items-center w-12 h-12 p-12 rounded-full bg-[#A89B85]">
+                        <div class="triangle-right ml-2">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row items-center justify-center text-3xl font-bold tracking-wider mt-12 space-x-6 pl-4">
+                    <div>202281543.mp4</div>
+                    <button class="bg-[#82D354] p-4 text-[#F4EEE1]">UPLOAD</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
