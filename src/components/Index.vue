@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="flex flex-row items-center justify-center text-3xl font-bold tracking-wider mt-4 space-x-6 pl-4">
-          <form class="flex items-center p-4">
+          <div class="flex items-center p-4">
             <input @change="Video" type="file" class="block w-full
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
@@ -58,7 +58,7 @@
               class="w-40 bg-[#82D354] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">送出</button>
               <button v-else 
               class=" bg-[#cee0c3a3] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">尚未查詢</button>
-          </form>
+          </div>
         </div>
       </div>
 
@@ -107,7 +107,8 @@ export default {
     },
     Video(e) {
       this.video.append('file', e.target.files[0])
-      console.log(this.video)
+      // print file size
+      console.log(e.target.files[0])
     },
     uploadVideo() {
       fetch(dataURL + '/uploadVideo/'+ this.id, {
@@ -116,10 +117,23 @@ export default {
           "Authorization": "Bearer " + localStorage.getItem("token"),
         },
         body: this.video
-      })
-        .then(response => response.json())
+      }).then(response => response.json())
         .then(data => {
           console.log(data)
+          if(data == 200)
+            this.$swal({
+              title: '上傳成功',
+              icon: 'success',
+              confirmButtonText: '確認',
+              background: '#F4EEE1'
+            })
+          else
+            this.$swal({
+              title: '上傳失敗',
+              icon: 'error',
+              confirmButtonText: '確認',
+              background: '#F4EEE1'
+            })
         })
     }
   }
