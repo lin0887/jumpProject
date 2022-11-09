@@ -56,7 +56,7 @@
                 " />
             <button v-if="already" @click="uploadVideo()"
               class="w-40 bg-[#82D354] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">送出</button>
-              <button v-else 
+            <button v-else
               class=" bg-[#cee0c3a3] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">尚未查詢</button>
           </div>
         </div>
@@ -75,7 +75,14 @@ export default {
       school: '尚未查詢',
       grade: '尚未查詢',
       video: new FormData(),
-      already: false
+      already: false,
+      toast: this.$swal.mixin({
+        toast: true,
+        position: 'top',
+        showConfirmButton: false,
+        timer: 1500,
+        background: '#F4EEE1',
+      })
     }
   },
   methods: {
@@ -111,30 +118,34 @@ export default {
       console.log(e.target.files[0])
     },
     uploadVideo() {
-      fetch(dataURL + '/uploadVideo/'+ this.id, {
+      fetch(dataURL + '/uploadVideo/' + this.id, {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token"),
         },
         body: this.video
-      }).then(response => response.json())
-        .then(data => {
-          console.log(data)
-          if(data == 200)
-            this.$swal({
-              title: '上傳成功',
-              icon: 'success',
-              confirmButtonText: '確認',
-              background: '#F4EEE1'
-            })
-          else
-            this.$swal({
-              title: '上傳失敗',
-              icon: 'error',
-              confirmButtonText: '確認',
-              background: '#F4EEE1'
-            })
-        })
+      }).then(res => {
+        if (res.status == 200) {
+          this.toast.fire({
+            icon: 'success',
+            title: '上傳成功'
+          })
+          //clear input
+          this.video = new FormData()
+          this.already = false
+          //clear data
+          this.id = '尚未查詢'
+          this.school = '尚未查詢'
+          this.grade = '尚未查詢'
+          this.contestant = ''
+        }
+        else {
+          this.toast.fire({
+            icon: 'error',
+            title: '上傳失敗'
+          })
+        }
+      })
     }
   }
 }
