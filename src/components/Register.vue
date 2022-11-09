@@ -53,7 +53,7 @@
                 <div>班際跳繩比賽</div>
                 <div>2022/11/11</div>
             </div>
-            <form class="mt-32 mb-16 flex items-center  text-3xl font-bold tracking-wider space-x-6 pl-4">
+            <div class="mt-32 mb-16 flex items-center  text-3xl font-bold tracking-wider space-x-6 pl-4">
                 <input @change="File" type="file" class="block 
                   file:mr-4 file:py-2 file:px-4
                   file:rounded-full file:border-0
@@ -61,7 +61,7 @@
                   file:text-lg file:font-semibold
                   file:text-center file:tracking-wide
                 " />
-            </form>
+            </div>
             <button @click="uploadCSV()"
                 class="ml-32 mt-8 w-64 text-3xl bg-[#82D354] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">批量登記</button>
         </div>
