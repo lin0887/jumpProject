@@ -36,7 +36,7 @@
     <div class="w-full flex flex-col">
       <div class="flex flex-row items-center text-5xl space-x-8 font-bold">
         <div>班際跳繩比賽</div>
-        <div>2022/11/11</div>
+        <div>{{ date }}</div>
       </div>
       <div class="w-10/12 mt-8">
         <div class="flex justify-center items-center bg-[#CEC3B2] h-96">
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+let m = new Date()
 const dataURL = "http://localhost:8000"
 export default {
   data() {
@@ -76,6 +77,7 @@ export default {
       grade: '尚未查詢',
       video: new FormData(),
       already: false,
+      date: "",
       toast: this.$swal.mixin({
         toast: true,
         position: 'top',
@@ -85,6 +87,9 @@ export default {
       })
     }
   },
+  mounted(){
+    this.date = m.getFullYear() + "/" + (m.getMonth() + 1) + "/" + m.getDate()
+  },  
   methods: {
     search() {
       console.log(this.contestant)
