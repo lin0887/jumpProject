@@ -43,7 +43,7 @@
 </template>
 
 <script>
-const dataURL = "http://localhost:8000"
+const baseURL = "http://"+import.meta.env.VITE_BACKEND_HOST+":"+import.meta.env.VITE_BACKEND_PORT;
 const data = new Array()
 export default {
     name: 'Rank',
@@ -55,7 +55,7 @@ export default {
         }
     },
     mounted() {
-        fetch(dataURL + "/contestants", {
+        fetch(baseURL + "/contestants", {
             method: 'GET',
             headers: {
                 Authorization: `bearer ${localStorage.getItem('token')}`

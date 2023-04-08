@@ -23,7 +23,7 @@
 </template>
 
 <script>
-const baseURL = "http://localhost:8000";
+const baseURL = "http://"+import.meta.env.VITE_BACKEND_HOST+":"+import.meta.env.VITE_BACKEND_PORT;
 export default {
     data() {
         let usernameValid = (rule, value, callback) => {

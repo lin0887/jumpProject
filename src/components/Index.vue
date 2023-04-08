@@ -68,7 +68,7 @@
 
 <script>
 let m = new Date()
-const dataURL = "http://localhost:8000"
+const baseURL = "http://"+import.meta.env.VITE_BACKEND_HOST+":"+import.meta.env.VITE_BACKEND_PORT;
 export default {
   data() {
     return {
@@ -96,7 +96,7 @@ export default {
       if (this.contestant == undefined)
         alert('請輸入參賽者編號')
       else
-        fetch(dataURL + '/contestants/' + this.contestant, {
+        fetch(baseURL + '/contestants/' + this.contestant, {
           method: "GET",
           headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
@@ -123,7 +123,7 @@ export default {
       console.log(e.target.files[0])
     },
     uploadVideo() {
-      fetch(dataURL + '/uploadVideo/' + this.id, {
+      fetch(baseURL + '/uploadVideo/' + this.id, {
         method: "POST",
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("token"),

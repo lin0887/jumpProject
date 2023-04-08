@@ -70,7 +70,7 @@
 </template>
 
 <script>
-const dataURL = "http://localhost:8000"
+const baseURL = "http://"+import.meta.env.VITE_BACKEND_HOST+":"+import.meta.env.VITE_BACKEND_PORT;
 export default {
     data() {
         return {
@@ -101,7 +101,7 @@ export default {
                 })
                 return
             }
-            fetch(dataURL + "/contestants", {
+            fetch(baseURL + "/contestants", {
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -139,7 +139,7 @@ export default {
                 })
                 return
             }
-            fetch(dataURL + "/uploadCSV", {
+            fetch(baseURL + "/uploadCSV", {
                 method: "POST",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token"),

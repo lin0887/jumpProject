@@ -7,7 +7,6 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 router.beforeEach((to, from, next) => {
   const baseURL = "http://localhost:8000";
-  console.log("導航守衛啟動");
   if (to.meta.requiresAuth) {
     const api = `${baseURL}/check`;
     fetch(api, {
@@ -28,6 +27,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
 
 const app = createApp(App)
 app.use(router)
