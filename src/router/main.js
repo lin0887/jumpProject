@@ -13,14 +13,14 @@ let routes = [
       requiresAuth: true
     }
   },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("../components/Login.vue"),
-    meta: {
-      requiresAuth: false
-    }
-  },
+  // {
+  //   path: "/login",
+  //   name: "Login",
+  //   component: () => import("../components/Login.vue"),
+  //   meta: {
+  //     requiresAuth: false
+  //   }
+  // },
   {
     path: "/register",
     name: "Register",

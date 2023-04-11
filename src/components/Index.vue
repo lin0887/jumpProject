@@ -1,77 +1,76 @@
 <template>
-  <div class="flex flex-nowrap text-[#A89B85] pt-32">
-    <div class="w-full flex flex-col items-center">
-      <div>
-        <div class="flex flex-row items-center text-4xl font-bold tracking-wider">
-          <div class="mr-4 mb-4">
-            <span class="material-symbols-outlined text-bold text-8xl">
-              account_circle
-            </span>
-          </div>
-          <div class="">歡迎裁判，Admin !</div>
+  <div class="flex flex-col lg:flex-row text-[#A89B85] pt-32 md:pt-2  items-center">
+    <div class="w-full lg:w-1/2 flex flex-col items-center mb-12 lg:mb-0">
+      <div class="flex flex-row items-center text-4xl font-bold tracking-wider">
+        <div class="mr-4 mb-4">
+          <span class="material-symbols-outlined text-bold text-8xl">
+            account_circle
+          </span>
         </div>
-        <div class="flex flex-row space-x-4 text-2xl font-bold tracking-wider ">
-          <input v-model="contestant"
-            class="bg-[#CEC3B2] text-left p-2 flex items-center outline-none placeholder:text-left placeholder:text-[#F4EEE1] placeholder:text-3xl"
-            placeholder="參賽者編號">
-          <button @click="search()" class="border-[#A89B85] border-4 text-center p-2 rounded">查詢</button>
+        <div class="">歡迎裁判!</div>
+      </div>
+      <div class="flex flex-row space-x-4 text-2xl font-bold tracking-wider ">
+        <input v-model="contestant"
+          class="bg-[#CEC3B2] text-left p-2 flex items-center outline-none placeholder:text-left placeholder:text-[#F4EEE1] placeholder:text-3xl"
+          placeholder="參賽者編號">
+        <button @click="search()" class="border-[#A89B85] border-4 text-center p-2 rounded">查詢</button>
+      </div>
+      <div class="flex flex-col text-4xl font-bold tracking-wider mt-12 space-y-8 md:space-y-4  pl-4">
+        <div class="flex flex-row ">
+          <div class="mr-4">參賽者:</div>
+          <div>{{ id }}</div>
         </div>
-        <div class="flex flex-col text-4xl font-bold tracking-wider mt-12 space-y-8  pl-4">
-          <div class="flex flex-row ">
-            <div class="mr-4">參賽者:</div>
-            <div>{{ id }}</div>
-          </div>
-          <div class="flex flex-row">
-            <div class="mr-12">學校:</div>
-            <div>{{ school }}</div>
-          </div>
-          <div class="flex flex-row">
-            <div class="mr-12">年級:</div>
-            <div>{{ grade }}</div>
-          </div>
+        <div class="flex flex-row">
+          <div class="mr-12">學校:</div>
+          <div>{{ school }}</div>
+        </div>
+        <div class="flex flex-row">
+          <div class="mr-12">年級:</div>
+          <div>{{ grade }}</div>
         </div>
       </div>
-
     </div>
-    <div class="w-full flex flex-col">
+    <div class="w-full lg:w-1/2 flex flex-col items-center">
       <div class="flex flex-row items-center text-5xl space-x-8 font-bold">
-        <div>班際跳繩比賽</div>
+        <div>跳繩比賽</div>
         <div>{{ date }}</div>
       </div>
       <div class="w-10/12 mt-8">
-        <div class="flex justify-center items-center bg-[#CEC3B2] h-96">
-          <div class="flex justify-center items-center w-12 h-12 p-12 rounded-full bg-[#A89B85]">
-            <div class="triangle-right ml-2">
+        <div>
+          <div v-if="videoUrl">
+            <video :src="videoUrl" class="mt-4 max-w-full" controls></video>
+          </div>
+          <div v-else class="flex justify-center items-center bg-[#CEC3B2] md:h-50 h-96 relative">
+            <div class="flex justify-center items-center w-12 h-12 p-12 rounded-full bg-[#A89B85] absolute z-20">
+              <div class="triangle-right ml-2"></div>
             </div>
           </div>
         </div>
-        <div class="flex flex-row items-center justify-center text-3xl font-bold tracking-wider mt-4 space-x-6 pl-4">
+        <div class="flex flex-row items-center justify-center text-3xl font-bold tracking-wider mt-4 space-x-8">
           <div class="flex items-center p-4">
-            <input @change="Video" type="file" class="block w-full
-                  file:mr-4 file:py-2 file:px-4
-                  file:rounded-full file:border-0
-                  file:bg-[#CEC3B2] file:text-[#A89B85]
-                  file:text-lg file:font-semibold
-                  file:text-center file:tracking-wide
-                " />
-            <button v-if="already" @click="uploadVideo()"
-              class="w-40 bg-[#82D354] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">送出</button>
-            <button v-else
-              class=" bg-[#cee0c3a3] text-[#F4EEE1] rounded border-0 font-semibold text-center tracking-wide px-4 mr-4 py-2">尚未查詢</button>
+            <input ref="fileInput" @change="onVideoChange" type="file" accept="video/*" hidden />
           </div>
+          <button @click="chooseFile"
+            class="rounded-xl w-40 bg-[#CEC3B2] text-[#A89B85] border-0 text-center tracking-wide px-4 mr-4 py-2">上傳檔案</button>
+          <button v-if="already" @click="uploadVideo()"
+            class="w-40 rounded-xl bg-[#82D354] text-[#F4EEE1] border-0 text-center tracking-wide px-4 mr-4 py-2">送出</button>
+          <button v-else
+            class="w-40 bg-[#cee0c3a3] text-[#F4EEE1] rounded-xl border-0 text-center tracking-wide px-4 mr-4 py-2">尚未查詢</button>
         </div>
       </div>
-
     </div>
+
   </div>
 </template>
 
+
 <script>
 let m = new Date()
-const baseURL = "http://"+import.meta.env.VITE_BACKEND_HOST+":"+import.meta.env.VITE_BACKEND_PORT;
+const baseURL = "http://" + import.meta.env.VITE_BACKEND_HOST + ":" + import.meta.env.VITE_BACKEND_PORT;
 export default {
   data() {
     return {
+      videoUrl: '',
       id: '尚未查詢',
       school: '尚未查詢',
       grade: '尚未查詢',
@@ -87,10 +86,20 @@ export default {
       })
     }
   },
-  mounted(){
+  mounted() {
     this.date = m.getFullYear() + "/" + (m.getMonth() + 1) + "/" + m.getDate()
-  },  
+  },
   methods: {
+    chooseFile() {
+      this.$refs.fileInput.click();
+    },
+    onVideoChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.videoUrl = URL.createObjectURL(file);
+        this.video.append('file', e.target.files[0])
+      }
+    },
     search() {
       console.log(this.contestant)
       if (this.contestant == undefined)
@@ -116,11 +125,6 @@ export default {
               this.grade = '查無此人'
             }
           })
-    },
-    Video(e) {
-      this.video.append('file', e.target.files[0])
-      // print file size
-      console.log(e.target.files[0])
     },
     uploadVideo() {
       fetch(baseURL + '/uploadVideo/' + this.id, {
@@ -155,4 +159,3 @@ export default {
   }
 }
 </script>
-

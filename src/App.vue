@@ -6,8 +6,8 @@
         <router-link to="/" class="text-2xl">上傳</router-link>
         <router-link to="/rank" class="text-2xl">賽務榜</router-link>
         <router-link to="/register" class="text-2xl">選手登記</router-link>
-        <router-link v-if="islogin" @click="clearLocalStorage()" to="/login" class="text-2xl">登出</router-link>
-        <router-link v-else to="/login" class="text-2xl">登入</router-link>
+        <!-- <router-link v-if="islogin" @click="clearLocalStorage()" to="/login" class="text-2xl">登出</router-link> -->
+        <!-- <router-link v-else to="/login" class="text-2xl">登入</router-link> -->
         <!-- <router-link to="" class="bg-[#F4EEE1] p-2 w-16 h-8 flex justify-center items-center ml-4 rounded">
           <span class="material-symbols-outlined text-[#A89B85]">
             menu
