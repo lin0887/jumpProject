@@ -95,10 +95,10 @@ export default {
     },
     onVideoChange(event) {
       const file = event.target.files[0];
-      this.video.append('files', event.target.files[0])
       if (file) {
         this.videoUrl = URL.createObjectURL(file);
-        
+        this.video.append('file', file)
+        console.log(this.video)
       }
     },
     search() {
@@ -132,7 +132,6 @@ export default {
       fetch("http://192.168.68.103:8000/uploadVideo/A1111", {
         headers: {
           Accept: "application/json",
-          "Content-Type": "multipart/form-data"
         },
         method: "POST",
         body:this.video
@@ -144,6 +143,7 @@ export default {
           })
           //clear input
           this.video = new FormData()
+          this.videoUrl = ''
           this.already = false
           //clear data
           this.id = '尚未查詢'
