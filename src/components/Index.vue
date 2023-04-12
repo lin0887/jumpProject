@@ -95,9 +95,10 @@ export default {
     },
     onVideoChange(event) {
       const file = event.target.files[0];
+      this.video.append('files', event.target.files[0])
       if (file) {
         this.videoUrl = URL.createObjectURL(file);
-        this.video.append('file', e.target.files[0])
+        
       }
     },
     search() {
@@ -127,16 +128,14 @@ export default {
           })
     },
     uploadVideo() {
-      const body = new FormData
-      body.append("file",this.video)
-
+      console.log(this.video)
       fetch("http://192.168.68.103:8000/uploadVideo/A1111", {
-        body,
         headers: {
           Accept: "application/json",
           "Content-Type": "multipart/form-data"
         },
-        method: "POST"
+        method: "POST",
+        body:this.video
       }).then(res => {
         if (res.status == 200) {
           this.toast.fire({
