@@ -127,12 +127,16 @@ export default {
           })
     },
     uploadVideo() {
-      fetch(baseURL + '/uploadVideo/' + this.id, {
-        method: "POST",
+      const body = new FormData
+      body.append("file",this.video)
+
+      fetch("http://192.168.68.103:8000/uploadVideo/A1111", {
+        body,
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token"),
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data"
         },
-        body: this.video
+        method: "POST"
       }).then(res => {
         if (res.status == 200) {
           this.toast.fire({
