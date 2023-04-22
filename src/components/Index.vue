@@ -51,7 +51,7 @@
             <input ref="fileInput" @change="onVideoChange" type="file" accept="video/*" hidden />
           </div>
           <button @click="chooseFile"
-            class="rounded-xl w-40 bg-[#CEC3B2] text-[#A89B85] border-0 text-center tracking-wide px-4 mr-4 py-2">上傳檔案</button>
+            class="rounded-xl w-40 bg-[#CEC3B2] text-[#A89B85] border-0 text-center tracking-wide px-4 mr-4 py-2">錄影</button>
           <button v-if="already" @click="uploadVideo()"
             class="w-40 rounded-xl bg-[#82D354] text-[#F4EEE1] border-0 text-center tracking-wide px-4 mr-4 py-2">送出</button>
           <button v-else
