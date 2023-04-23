@@ -129,7 +129,7 @@ export default {
     },
     uploadVideo() {
       console.log(this.video)
-      fetch("http://192.168.68.103:8000/uploadVideo/A1111", {
+      fetch(`${baseURL}/uploadVideo/${this.id}`, {
         headers: {
           Accept: "application/json",
         },
