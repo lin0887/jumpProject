@@ -3,9 +3,7 @@
     <div class="w-full lg:w-1/2 flex flex-col items-center mb-12 lg:mb-0">
       <div class="flex flex-row items-center text-4xl font-bold tracking-wider">
         <div class="mr-4 mb-4">
-          <span class="material-symbols-outlined text-bold text-8xl">
-            account_circle
-          </span>
+          <img src="/account_circle.svg" with="600" heigh="400">
         </div>
         <div class="">歡迎裁判!</div>
       </div>
